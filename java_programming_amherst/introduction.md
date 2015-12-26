@@ -1,11 +1,13 @@
-/* This language was developed in the early 1990s by Sun Microsystems, and it has received
+## Intro to Java
+
+This language was developed in the early 1990s by Sun Microsystems, and it has received
 much attention because it facilitates development of graphical, interactive web pages in a
 way that is largely independent of particular hardware.
 
 Programming is essentially the task of problem solving.
 
 Programming is also a good way to begin learning about the field of computer science, which examines the ways data
-can be organized and manipulated. Com- puter scientists study questions such as:
+can be organized and manipulated. Computer scientists study questions such as:
 What problems have efficient solutions? What problems will never be solved by computers?
 How can hardware and software work together in a multiprocessor system?
 Can we write programs that are provably correct?
@@ -81,3 +83,71 @@ Algorithms need not be expressed in a particular computer language, but they mus
 
 - Suppose someone tells you that they’ve chosen a number between 1 and 100 and asks you to guess it.
 When you make a guess, they’ll tell you if you’ve found the number, if you’re high, or if you’re low.
+
+Top-down design:
+- By systematically dividing the problem into subtasks and then solving the subtasks,
+it is possible to solve the whole problem of producing a calendar.
+This illustrates the idea of top-down design, where a top-level problem is
+reduced to smaller and smaller problems.
+
+
+A method:
+- a method is used to describe the solution to a subtask.
+
+```java
+public static int getDaysInMonth (int month, int year) {
+  if (month == 4 || month == 6 || month == 9 || month == 11)
+    return 30;
+  else if (month == 1 || month == 3 || month == 5 || month == 7 ||
+          month == 8 || month == 10 || month == 12)
+    return 31;
+  else if (isLeapYear(year))
+    return 29;
+  else
+    return 28;
+}
+```
+
+- Methods are sometimes known as functions, procedures or subroutines in other programming languages.
+- One key to good algorithm design, and good programs, is an appropriate de- composition of the overall problem into subtasks. If good choices are made, the methods that solve the subtasks can be fairly simple, leading to a clean, understandable program.
+- This is called decomposition in Java. I know it in Ruby as just Single responsibility principle.
+
+#### Errors
+1. Compilation errors
+- These are errors in following the precise rules of the Java language. For example, semicolons are usually used to separate distinct steps of a program. If you leave one out, the program is meaningless, and it will fail when you try to compile it.
+- Compilation errors are the simplest kind of errors, because you can’t avoid noticing them. Interesting point.
+- I guess this is why Javascript is a tough language. There are so many silent non-compilation errors.
+
+2. Runtime errors (after compilation when you try to run it)
+- Run-time errors. Sometimes your program will compile fine, but it will “crash” or fail in some way when you try to run it. For example, your program might try to divide a number by zero. This is an illegal operation, and it will cause an exception.
+- Run-time errors are trickier than compilation errors, because an erroneous program might fail only part of the time.
+
+3. Logical error:
+- You might have a program that always compiles and never crashes.
+Is it right? Perhaps it is, but perhaps it doesn’t do what you intended.
+- For example, suppose you wanted a program to read a list of numbers and sort them. If the program prints them out in the wrong order, or (worse yet) if it prints out di↵erent numbers, you have a logical error.
+
+- Errors can often be detected and eliminated with careful testing.
+- Methods can often be tested individually.
+- Confidence in the correctness of individual components of a program can then lead to confidence in the overall correctness.
+
+
+#### Why Java  
+1.7 Why Java?
+There are many reasons why Java is a good first programming language:
+1. Java is a safe language, in the sense that many errors are detected that might be ignored in another language. This greatly simplifies the task of debugging.
+2. Java is object-oriented. As mentioned earlier, classes and inheritance provide a powerful organizational tool.
+3. Java has an extensive library of built-in methods and classes, which program- mers can use in their own work. Java’s facility for handling strings is much better than that in C or Pascal.
+4. Java is portable. If a Java program works on one computer, it should be able
+to work on any computer that handles Java.
+5. Java uses garbage collection, a mechanism for recovering memory that is no longer needed. This simplifies programming.
+6. Java supports graphics and can be used in web pages.
+7. Java is fairly simple.
+
+Java is not perfect. In order to achieve safety and portability, Java is interpreted, which essentially means that every step is managed by a master program, the Java Virtual Machine (VM). This means that Java is usually slower than languages such as C, Pascal, or C++
+
+Garbage collection also affects speed. Recent versions of the Java VM have incorporated changes that improve the speed of both interpretation and garbage collection, and the speed gap between Java and other languages has been greatly reduced.
+
+The safety features and library make it easy for programmers to get started, focusing on algorithms and program organization.
+
+C++ is faster than Java and o↵ers di↵erent opportunities for creating reusable code, but lacks some of Java’s safety and simplicity.
