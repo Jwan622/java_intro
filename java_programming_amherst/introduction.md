@@ -151,3 +151,7 @@ Garbage collection also affects speed. Recent versions of the Java VM have incor
 The safety features and library make it easy for programmers to get started, focusing on algorithms and program organization.
 
 C++ is faster than Java and o↵ers di↵erent opportunities for creating reusable code, but lacks some of Java’s safety and simplicity.
+
+
+#### On style and documentation
+Style and documentation. Much of the “style” of a program relates to the way methods and classes are used to lead to an overall solution. There are aspects of style that go beyond this. As we’ll see in the chapters ahead, the choice of names, the use of spacing, and the use of comments (intended for humans, not the computer), can make the di↵erence between a confusing program and one that is clear and understandable. If you pay attention to these ideas, your programs will be much easier for others to read, understand, evaluate, and maintain. Obviously this is critical when working on a group project. Good style and documentation will also make it easier for you to understand your own programs, even while working on them.
