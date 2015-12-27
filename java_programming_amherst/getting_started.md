@@ -275,3 +275,56 @@ int value = billion * billion;
 
 You’ll actually end up with value equalling  1486618624. This happens because no int can hold a number larger than about 2 billion. In e↵ect, the internal repre- sentation of a large number ends up being confused with that of some other number. The same thing can happen in the negative direction: numbers smaller than about  2 billion cannot be represented.
 Floating-point values have di↵erent limitations. Overflow can occur, though at a much higher cuto↵. The more significant problem is precision. If a person is asked to divide one by three, he or she can’t write the answer down as a decimal number without losing part of the answer. The answer is close to 0.33333333, but that value is only approximate. Values of type double have about 15 decimal digits of precision. Interestingly, because computers are based on binary (base 2) arithmetic, numbers such as 1/5.0, which can be represented precisely in decimal, cannot be represented precisely in a computer. Because of imprecision, the value of a / b * b might not equal the value of a.
+
+
+### Another java program
+
+```java
+import java.util.Scanner;
+public class TempCalc {
+
+  // This program does temperature conversion.
+  // L. McGeoch, 9/2004
+
+  public static Scanner keyboard = new Scanner(System.in); 9
+  public static void main (String[] args) {
+    double fahrenheit; // These variables contain
+    double celsius; // temps in three different
+    double kelvin; // systems.
+
+    System.out.print ("Enter a temperature in Fahrenheit degrees: ");
+    fahrenheit = keyboard.nextDouble(); // reads from the keyboard
+
+    celsius = (fahrenheit-32) * (5.0/9.0);
+    kelvin = celsius + 273.15;
+
+    System.out.println ("That’s " + celsius + " degrees Celsius,");
+    System.out.println ("or " + kelvin + " degrees Kelvin.");
+  }
+}
+```
+
+In this program, we declare 3 double variables without initializing them.
+The program asks for information, it reads the information, it computes something, and it writes the answer.
+
+Two special statements must appear in any program that requires keyboard input. The statement:
+
+```
+import java.util.Scanner;
+```
+
+must be at the very top of the program, even before the line giving the name of your class. The statement:
+
+```
+public static Scanner keyboard = new Scanner(System.in);
+```
+
+must appear within your class but outside your main method.
+Those two statements ensure that the program can read from the keyboard.
+
+
+If a program has established access to the keyboard, it can read numbers with the method call
+
+```
+keyboard.nextDouble().
+```
