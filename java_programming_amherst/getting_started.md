@@ -328,3 +328,126 @@ If a program has established access to the keyboard, it can read numbers with th
 ```
 keyboard.nextDouble().
 ```
+
+The call waits for a number to be typed at the keyboard. That number could be a floating point number, such as 4.51 or 2.3e4, or it could be an integer, such as -23. In any event, after the number is typed, keyboard.nextDouble() gives a value that can be used in some way. Typically, programmers will simply take the value and assign it to a variable.
+
+
+Sometimes a program will need to read an integer instead of a double. In this case it’s appropriate to use
+```
+keyboard.nextInt().
+```
+
+Like in this code:
+```java
+int eggs, dozens;
+System.out.print ("How many eggs do you have? ");
+eggs = keyboard.nextInt();
+dozens = eggs / 12;
+System.out.println ("You have " + dozens + " dozen eggs.");
+```
+
+Note the use of integer division here, producing an integer quotient. Usually it is best to declare a variable as an int if you know that the value will be integral.
+
+**quick note about difference between print and println**
+The only di↵erence between System.out.print and System.out.println is that println always adds a carriage return at the end of the line and print doesn’t.
+
+In this code:
+```java
+System.out.println ("You have " + dozens + " dozen eggs.");
+```
+
+Whenever the plus sign, +, is applied to a string, it means concatenation, not addition.
+
+It is also possible to do arithmetic computations within a println. The previous statement is equivalent to:
+
+```java
+System.out.println ("You have " + (eggs/12) + " dozen eggs.");
+```
+
+
+
+#### Another code example with strings and integers
+
+Let's check out another program. Here’s an example of what happens when it is run:
+```
+What’s your name? Nancy
+What’s your age? 26
+Welcome Nancy, I hope you enjoy programming in Java. You seem to be 26 years old.
+```
+
+
+```java
+import java.util.Scanner;
+public class Greet {
+   //  An example reading strings
+   //                         L. McGeoch, 9/2004
+
+  public static Scanner keyboard = new Scanner(System.in);
+  public static void main (String[] args) {
+     String name;       // the user’s name
+     int    age;        // the user’s age
+     System.out.print ("What’s your name? ");
+     name = keyboard.nextLine();
+     System.out.print ("What’s your age? ");
+     age = keyboard.nextInt();
+     System.out.println ("Welcome " + name +
+         ", I hope you enjoy programming in Java.");
+     System.out.println ("You seem to be " + age + " years old.");
+  }
+}
+```
+
+Let's look at this variable declaration:
+
+```
+String name;
+```
+
+This example shows the declaration and use of an new kind of variable, a string. A string is similar to an int or a double, but it holds a sequence of characters.
+
+You can read something like this:
+
+```
+String s = "Hello";
+s = s + " " + "there";
+```
+
+This pair of statements gives the value “Hello” and then modifies it to contain “Hello there”. A quoted string is a string constant, in the same way that 3 is an int constant.
+
+We’ll see later that String is actually the name of a Java class that contains code that allows strings to be handled in sophisticated ways. Class names are always capitalized, and therefore you must always use the capitalized word String when you declare a string variable.
+
+This method:
+```
+keyboard.nextLine
+```
+
+permits a string to be read from the keyboard. It reads characters from the keyboard, up to the next newline character. The newline character, also known as a carriage return, end-of-line mark, or line break, is generated when you type the return key on a keyboard. The method returns a string containing all of the characters that were read, not including the newline.
+
+Take a look at this line:
+
+```java
+System.out.println ("Welcome " + name +
+    ", I hope you enjoy programming in Java.");
+```
+
+This is an example of how a single statement can be spread across multiple lines of a program.
+
+
+#### Comments and usage of them for style
+
+- Comments are essential in explaining a program. Each class should have com- ments at the beginning, explaining what the program does.
+- Within your program, you should use comments to explain variables.
+- If a program is complex, you can explain how its methods and subparts work together.
+
+Interesting. This is very different from the Turing way.
+
+There are two ways of delimiting comments, the // mark, which indicates that the rest of the line is a comment, and the
+```java
+//   Here’s our usual kind of comment.
+    /*   Here’s a comment that keeps
+             going,
+             and going,
+             and going.      */
+```
+
+You should use spacing to make your programs more clear. The computer ignores spacing in Java programs, except in string and char constants.
