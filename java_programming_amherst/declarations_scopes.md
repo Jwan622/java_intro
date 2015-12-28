@@ -111,3 +111,67 @@ println (i);
 ```
 
 The value you want to assign to i depends on the result of the if, and there is no sensible initialization.
+
+
+
+The compiler will try to detect situations in which you try to use a variable that is uninitialized or potentially uninitialized. For example, the following code will cause an error during compilation:
+```java
+int i;
+if (...)
+  i = 1;
+else if (...)
+  i = 2;
+System.out.println (i); // i might be uninitialized
+```
+
+If neither of the test conditions yields the value true, variable i will not be initialized before the println statement. The compiler will determine that i might be uninitialized when it is used and will produce an error message. The programmer has probably made a logical error and should have avoided using the second if test. Removing the second if, leaving i = 2 as the entire else-clause, will eliminate the compilation error.
+
+This example also illustrates the value of avoiding unnecessary initializations. Suppose the programmer had carelessly initialized i to zero when it was declared. The compiler would not have complained that i might have been uninitialized, and the logical error might not have been detected.
+
+
+#### More examples with scopes and initializations
+
+The following code is erroneous:
+```java
+while (...) {
+  int i = 2;
+... }
+  System.out.println (i);
+```
+
+In the above code, the i is used outside the while loop but the i that is declared inside the while loop is confined to the while loop's scope.
+
+This code is also incorrect:
+```java
+int i;   
+while (...) {   // another bad example
+  i = 2;
+.... }
+System.out.println (i);
+```
+
+In this case the problem is that the body of the while loop might never run. This would occur if the test condition of the while loop failed the first time. If the body is never executed, variable i might be uninitialized when it is used in the last statement.
+
+This code works:
+```java
+int i;   // a good example
+do {
+  i = 2;
+  ...
+} while (...);
+System.out.println (i);
+```
+
+The body of a do...while loop is always executed at least once, so variable i will always be initialized before the println.
+
+```java
+private static int f () {
+  ...
+  if (...)
+    return 1;
+  else if (...)
+    return 2;
+}
+```
+
+There are no local variables here, but the return value of a method is essentially a special variable that must be initialized when the method ends. If both of the test conditions fail, execution will fall out the bottom of the method without returning a value. The compiler will detect this situation and produce an error message.
