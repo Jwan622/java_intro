@@ -49,3 +49,29 @@ public static int fib (int n) {   // n is using 0 indexing here so 2 would actua
 ```
 
 Again, if n is more than one, a call to fib(n) must wait for the completion of calls to fib(n-1) and fib(n-2). Each __activation__, an individual call of the method, will have its own set of local variables.
+
+This way of computing Fibonacci numbers is actually very ineffcient. A call to fib(10) yields calls to fib(9) and fib(8). The call to fib(9) yields another call to fib(8), along with a call to fib(7). The second call to fib(8) is wasted computation, and the waste is magnified enormously on later calls.
+
+The lesson here is that recursion must be used carefully to avoid ine ciency. It’s important to avoid unnecessary recalculation of intermediate results.
+
+
+#### Towers of Hanoi problem
+
+Interestingly, this problem does not have a reasonable solution based on iteration, while recursion leads to a simple elegant solution.
+
+```java
+public static void hanoi (int n, int from, int to) {
+  if (n == 1)
+    System.out.println ("Move disk 1 from pin " + from
+                        + " to pin " + to);
+  else {
+    int other = 6 - from - to;
+    hanoi (n-1, from, other);
+    System.out.println ("Move disk " + n + " from pin "
+                        + from + " to pin " + to);
+    hanoi (n-1, other, to);
+  }
+}
+```
+
+Interesting the method here is cool. You basically shuffle disks around between pin 1 and 3 until you can get the largest disk that is not on pin 2 to pin 2. I think I need to play with it and observe the pattern. It's still unclear to me algorithmically what is going on.
