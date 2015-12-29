@@ -88,3 +88,124 @@ Method reverseArray takes an array of characters and returns a new array that co
 
 
 #### Palindrome method using arrays
+
+```java
+public static boolean paltest(String s) {
+  //Returns true if s is a palindrome.
+  //Ignores non-letters and is case-insensitive
+
+  char[] c = s.toLowerCase().toCharArray();
+  int i = 0;
+  int j = c.length-1;
+
+  while (i < j) {
+    if (!Character.isLetter(c[i])) {
+      i++
+    }
+    else if (!Character.isLetter(c[j])) {
+      j--;
+    }
+    else if (c[i] != c[j])
+      return false;
+    else {
+      i++;
+      j++;
+    }
+  }
+  return true;
+}
+```
+
+The method disregards nonalphabetic characters, and it makes no distinction between upper- and lower-case letters.
+This example uses its loop in an interesting way. Variables i and j keep track of current positions at the low and high ends of the array. If the character in position i is not a letter, i is increased and the loop test is applied again. So a word like +loool would be a palindrome. If there are letters that do match, i and j both move towards each other. The loop continues until the two index variables meet. If they do meet, the string must be a palindrome, and the method returns true.
+
+
+#### Matrices
+
+A matrix is an array with two or more dimensions.
+The following contains code that 1) creates a two-dimensional matrix to hold a multiplication table, and 2) prints the table.
+
+```java
+public static void main (String[] args) {
+  int[][] b = makeTable(10);
+  printTable(b)
+}
+
+static int[][] makeTable(int size) {
+  int[][] a = new int[size][size];
+  for (int i=0; i<size; ++i)
+    for (int j=0; j<size; ++j)
+      a[i][j] = i*j;
+  return a
+}
+
+static void printTable(int[][] a) {
+  for (int i=0; i<a.length; ++i) {
+    for (int j=0; j<a[i].length; ++j)
+      System.out.printf("%4d ", a[i][j]);
+    System.out.println();
+  }
+}
+```
+
+The line under main shows the declaration and initialization of a two-dimensional array. The makeTable method illustrates how a new array is created, and the i*j line shows the assignment of a value into the array. The first dimension of a two-dimensional array is often referred to as the row and the second as the column, so variable i is the row and j is the column.
+
+These two uses of the keyword length offer a hint about the true nature of a two-dimensional matrix, which is that it is simply an array of arrays. Each row is an array, and the overall matrix is an array of rows. We’ll discuss this idea more fully in Chapter 13.
+
+
+#### Array initialization
+
+When an array is created, all of the elements are given initial values, depending on the basetype, the declared type of the element.
+```
+In an array of...     The initial value is...
+    int                        0
+    double                     0.0
+    boolean                    false
+    char                       '\0'   //the zero character
+    objects                    null
+    arrays                     null
+
+```
+
+null is a constant that represents a missing object or a missing array. Suppose you wrote
+
+```java
+String[] a = new String[10];
+```
+
+Variable a[3] is initially null, meaning that it contains no string at all.
+It's possible to test this null value initialization by writing:
+```java
+if (a[3] == null)
+```
+
+
+Here's an example of a method that uses null:
+
+```java
+static boolean findString(String[] a, String s) {
+  for (int i=0; i < a.length; ++i) {
+    if (a[i] != null) {
+      if (a[i].equals(s)) return true;
+    }
+  }
+  return false;
+}
+```
+
+The goal of this method is to search for a string s in array a and to return true if it is found. The code takes note of the possibility that some elements of the array might be missing, perhaps because only part of the array was filled in during a previous step, or perhaps because one or more elements were set to null. This method checks whether each string a[i] is null and compares it to s only if the string really exists. **This is a critical check, because a[i].equals(s) will cause an exception if a[i] is null.**
+
+
+It is possible to initialize an array as part of its declaration. Here are some examples:
+```java
+  int[] a = {4, 5, 6};
+  String[] b = {"This", "is", "fun", "isn’t", "it?"};
+  int[][] m = {{1, 2, 3}, {4, 5, 6}};
+```
+
+The third example is a little trickier. Matrix m is e↵ectively a two-dimensional array with two rows and three columns. Another way to declare m would be to write
+```java
+  int[] m = {{1, 2, 3}, a};
+```
+
+Array a would become, in every sense, the second row of m. This would mean, for example, that any change to a[0] would change m[1][0].
