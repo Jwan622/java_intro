@@ -51,3 +51,40 @@ for (int i=1; i<a.length; ++i)
   if (a[i] > big)
     big = a[i];
 ```
+
+Here’s an example of an array with strings:
+```
+String s = "hello";
+char[] a = s.toCharArray();
+printBackward(a);
+```
+
+The method toCharArray in class String takes the given String and returns an array of chars containing all of its characters.
+
+Some methods that deal with arrays:
+
+```java
+public static void printBackward(char[] a) {
+  for (int i=a.length-1; i>=0; --i)
+     System.out.print (a[i]);
+  System.out.println();
+}
+```
+
+Notice the backwards iteration through the array in this method.
+
+
+Here's another method that deals with arrays:
+
+```java
+public static char[] reverseArray (char[] a) {
+  char[] b = new char[a.length];
+  for (int i=0; i<a.length; ++i)
+    b[i] = a[a.length-1-i];
+  return b; }
+```
+
+Method reverseArray takes an array of characters and returns a new array that contains the original sequence of characters reversed. Notice how it starts by initializing a new array called b then iterates through the parameter array from the back. It starts from the back of the parameter array and takes each element and puts it into the newly initialized array.
+
+
+#### Palindrome method using arrays
