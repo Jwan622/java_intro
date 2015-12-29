@@ -75,3 +75,26 @@ public static void hanoi (int n, int from, int to) {
 ```
 
 Interesting the method here is cool. You basically shuffle disks around between pin 1 and 3 until you can get the largest disk that is not on pin 2 to pin 2. I think I need to play with it and observe the pattern. It's still unclear to me algorithmically what is going on.
+
+
+Here’s an amusing way to multiply two integers:
+```java
+public int mult (int a, int b) {
+  if (a > 0)
+    return mult(a-1, b) + b;
+  else if (a == 0)
+    return 0;
+  else
+    return mult(-a, -b);
+}
+```
+
+What is the above if we did mult(-3,2)  which = -6?
+This would be the stack:
+mult(3,-2)
+mult(2,-2) + -2
+mult(1,-2) + -2
+mult(0,-2) + -2  
+then mult(0,-2) returns 0 and we can go back up the call stack.  
+
+it resolves to -6
