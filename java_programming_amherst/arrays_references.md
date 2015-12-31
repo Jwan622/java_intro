@@ -51,8 +51,8 @@ The swap method runs with variable m copied into i and variable n copied into j.
 
 But this actually does some swapping:
 ```
-public static void swapElements (int[] a, int i, int j) {
-  int t = a[i];
+public static void swapElements (int[] a, int i, int j) {  // j is the index of the element that GETS inserted into  
+  int t = a[i];                                            // index i
   a[i] = a[j];
   a[j] = t;
 }
@@ -129,3 +129,38 @@ private static int findMinPos (int[] a, int lo) {
 ```
 
 The above method returns the array index of the lowest value in the range of lo to the end of the array.
+
+
+Here’s a simple approach to sorting, called “selection sort.” Here is the explanation of selection sort in Wiki:
+
+> In computer science, selection sort is a sorting algorithm, specifically an in-place comparison sort. It has O(n2) time complexity, making it inefficient on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its simplicity, and it has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited.
+The algorithm divides the input list into two parts: the sublist of items already sorted, which is built up from left to right at the front (left) of the list, and the sublist of items remaining to be sorted that occupy the rest of the list. Initially, the sorted sublist is empty and the unsorted sublist is the entire input list. The algorithm proceeds by finding the smallest (or largest, depending on sorting order) element in the unsorted sublist, exchanging (swapping) it with the leftmost unsorted element (putting it in sorted order), and moving the sublist boundaries one element to the right.
+
+In this example, we’ll assume that we’re working with simple integers and that we want to sort them in increasing order:
+```java
+private static void selectionSort (int[] a) {
+    for (int i=0; i<a.length; ++i) {
+      int minPos = findMinPos(a, i);
+      swap (a,i,minPos);
+  }
+}
+```
+Note that this method uses two of the methods we saw earlier. The idea is to work our way through the array, determining which element should go in each position, and then swapping appropriately.
+
+I think this sorting method finds the index of the smallest element starting from i (which itself starts from 0) to the end of the array and then it sticks that in i. i then increases.
+
+
+#### Short explanation on garbage collection and Array memory allocation and Deallocation
+
+When you create a new array with the new keyword, we say the array is created is dynamically allocated. The array doesn’t disappear when the method ends. Instead it persists and can be returned via a return value, passed to other methods and so on. The array will remain in memory as long as there is some reference to it, i.e. as long as there is some variable holding its address. When there are no more references the array is garbage-collected and its memory becomes available for reuse.
+Here’s an example showing a case where an array becomes available for garbage collection:
+
+```
+  int[] a = new int[10];
+  int[] b = new int[20];
+  a = b;
+```
+
+After the first two statements, variables a and b point to distinct arrays. The third statement causes the address in b to be copied into a, meaning that both variables
+13.6. NULL REFERENCES 123
+point to the length-20 array. No variable points to the shorter array, so the shorter array is now garbage. When garbage collection occurs, the space used for the shorter array becomes available for reuse.
