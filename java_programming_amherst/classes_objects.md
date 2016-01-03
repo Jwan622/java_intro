@@ -206,6 +206,41 @@ if (s != null && s.precedes(t)) ...
 ```
 The “conditional and” prevents us from applying the precedes method to a null pointer, which is erroneous and would lead to an exception.
 
+#### Grid Color class
+
+```java
+import java.awt.Color;
+
+public class Grid {
+  public int size;
+  public Color[][] color;
+  public int count;
+
+  public Grid (int size) {
+    this.size = size;
+    count = 0;
+    color = new Color[size][size];
+    recolor();
+  }
+
+  public void recolor() {
+    count++
+    for (int i=0; i<size;  ++j)
+      for (int j=0; j<size; ++j)
+        color[i][j] = randomColor();
+  }
+
+  private Color randomColor() {
+    int red = (int) (Math.random() * 256);
+    int green = (int) (Math.random() * 256);
+    int blue = (int) (Math.random() * 256);
+
+    return new Color (red, green, blue);
+  }
+}
+
+```
+
 
 #### Summary and takeaways
 
