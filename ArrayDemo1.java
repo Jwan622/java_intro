@@ -25,7 +25,7 @@ public class ArrayDemo1 {
 
     //reversing array and inspecting it using Arrays.toString()
 
-    int[] array1 = {1,2,3,4};
+    int[] array1 = new int[] {1,2,3,4};
     int[] reversed_array = ArrayDemo1.reverse(array1);
     for (int i=0; i < reversed_array.length; ++i) {
       System.out.println(reversed_array[i]);
