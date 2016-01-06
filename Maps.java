@@ -7,6 +7,18 @@ views (such as keySet, entrySet, and values).
 
 The Java platform contains three general-purpose Map implementations: HashMap, TreeMap, and LinkedHashMap.
 */
+
+/*
+clear: Removes all the elements from the map.
+containsKey: Returns true if the map contains the requested key.
+equals: Compares an Object with the map for equality.
+get: Retrieve the value of the requested key.
+keySet: Returns a Set that contains all keys of the map.
+put: Adds the requested key-value pair in the map.
+remove: Removes the requested key and its value from the map, if the key exists.
+size: Returns the number of key-value pairs currently in the map.
+*/
+
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Map;
@@ -28,6 +40,30 @@ public class Maps {
     String element1 = (String) mapA.get("key1");
     // why do I need the type cast on the right?
     System.out.println(element1);
+
+    //Another examples with maps
+    Map vehicles = new HashMap();
+    vehicles.put("BMW", 5);
+    vehicles.put("Mercedes", 3);
+    vehicles.put("Audi", 4);
+    vehicles.put("Ford", 10);
+
+    System.out.println("Total vehicles: " + vehicles.size());
+
+    for(String key: vehicles.keySet())
+      System.out.println(key + " - " + vehicles.get(key));
+    System.out.println();
+
+    String searchKey = "Audi";
+    if (vehicles.containsKey(searchKey))
+      System.out.println("Found total " + vehicles.get(searchKey) + " "
+        + searchKey + " cars!\n");
+
+    // clears vehicles
+    vehicles.clear();
+
+    //should equal to 0 now
+    System.out.println("Vehicle now contains this many vehicles :" + vehicles.size());
 
     // Lets iterate through the keys of this map:
 
