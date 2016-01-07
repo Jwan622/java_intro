@@ -2,10 +2,10 @@
 
 There are a number of situations in software engineering when it is important for disparate groups of programmers to agree to a "contract" that spells out how their software interacts. Each group should be able to write their code without any knowledge of how the other group's code is written. Generally speaking, interfaces are such contracts.
 
-For example, imagine a futuristic society where computer-controlled robotic cars transport passengers through city streets without a human operator. Automobile manufacturers write software (Java, of course) that operates the automobile—stop, start, accelerate, turn left, and so forth. Another industrial group, electronic guidance instrument manufacturers, make computer systems that receive GPS (Global Positioning System) position data and wireless transmission of traffic conditions and use that information to drive the car.
+For example, imagine a futuristic society where computer-controlled robotic cars transport passengers through city streets without a human operator. **Automobile manufacturers write software (Java, of course) that operates the automobile—stop, start, accelerate, turn left, and so forth. Another industrial group, electronic guidance instrument manufacturers, make computer systems that receive GPS (Global Positioning System) position data and wireless transmission of traffic conditions and use that information to drive the car.
 
 __Analogy coming__
-The auto manufacturers must publish an industry-standard interface that spells out in detail what methods can be invoked to make the car move (any car, from any manufacturer). The guidance manufacturers (not the interface but someone who implements it) can then write software that invokes the methods described in the interface to command the car. Neither industrial group needs to know how the other group's software is implemented. In fact, each group considers its software highly proprietary and reserves the right to modify it at any time, as long as it continues to adhere to the published interface.
+The auto manufacturers must publish an industry-standard interface that spells out in detail what methods can be invoked to make the car move (any car, from any manufacturer). The guidance manufacturers (not the interface but someone who implements it) can then write software that invokes the methods described in the interface to command the car. Neither industrial group needs to know how the other group's software is implemented.** In fact, each group considers its software highly proprietary and reserves the right to modify it at any time, as long as it continues to adhere to the published interface.
 
 **Interfaces in Java**
 
@@ -42,6 +42,24 @@ Note that the method signatures have no braces and are terminated with a semicol
 
 To use an interface, you write a class that implements the interface. **When an instantiable class implements an interface, it provides a method body for each of the methods declared in the interface.** For example,
 
+```java
+public class OperateBMW760i implements OperateCar {
+
+    // the OperateCar method signatures, with implementation --
+    // for example:
+    int signalTurn(Direction direction, boolean signalOn) {
+       // code to turn BMW's LEFT turn indicator lights on
+       // code to turn BMW's LEFT turn indicator lights off
+       // code to turn BMW's RIGHT turn indicator lights on
+       // code to turn BMW's RIGHT turn indicator lights off
+    }
+
+    // other members, as needed -- for example, helper classes not
+    // visible to clients of the interface
+}
+```
+
+In the robotic car example above, it is the automobile manufacturers who will implement the interface. Chevrolet's implementation will be substantially different from that of Toyota (both are the classes that implement the interface), of course, but both manufacturers will adhere to the same interface.
 
 #### The interface body
 
@@ -69,7 +87,6 @@ public interface Relatable {
 }
 ```
 
-
 #### Using an interface as a type
 
 When you define a new interface, you are defining a new reference data type. You can use interface names anywhere you can use any other data type name. If you define a reference variable whose type is an interface, any object you assign to it must be an instance of a class that implements the interface.
@@ -85,3 +102,6 @@ public Object findLargest(Object object1, Object object2) {
     return object2;
 }
 ```
+
+I think in the above code, it's implied that any object that is passed in (an int or a string) can then be type cast as
+a Relatable
