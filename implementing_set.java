@@ -94,6 +94,7 @@ public class Set<T> {
     arrayElement =(T[]) new Object[tempsize];
     System.arraycopy(temparray, 0, arrayElement, 0, size); //copying contents of temp array into arrayElement with larger size and so the empty spot is in the back.
   }
+
 }
 
 /*
