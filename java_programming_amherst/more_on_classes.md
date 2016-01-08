@@ -129,3 +129,60 @@ Java classes often provide an equals method that compares objects rather than po
 ```
 
 As mentioned earlier, it is vital use this way of comparing strings rather than ==.
+
+
+#### More on private instance variables:
+
+Instance variables are made private to **force the users of those class to use methods to access them.** In most cases there are plain getters and setters but other methods might be used as well.
+
+Using methods would allow you, for instance, to restrict access to read only, i.e. a field might be read but not written, if there's no setter. That would not be possible if the field was public.
+
+Additionally, you might add some checks or conversions for the field access, which would not be possible with plain access to a public field. If a field was public and you'd later like to force all access through some method that performs additional checks etc. You'd have to change all usages of that field. If you make it private, you'd just have to change the access methods later on.
+
+If phone was private:
+
+Consider this case:
+```java
+class Address {
+  private String phone;
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+}
+
+//access:
+Address a = new Address();
+a.setPhone("001-555-12345");
+```
+If we started with the class like this and later it would be required to perform checks on the phoneNumber (e.g. some minimum length, digits only etc.) you'd just have to change the setter:
+```java
+class Address {
+  private String phone;
+
+  public void setPhone(String phone) {
+    if( !isValid( phone) ) { //the checks are performed in the isValid(...) method
+     throw new IllegalArgumentException("please set a valid phone number");
+    }
+
+    this.phone = phone;
+  }
+}
+
+//access:
+Address a = new Address();
+a.setPhone("001-555-12345"); //access is the same
+```
+If phone was public:
+
+Someone could set phone like this and you could not do anything about it:
+```
+Address a = new Address();
+a.phone="001-555-12345";
+```
+If you now want to force the validation checks to be performed you'd have to make it private and whoever wrote the above lines would have to change the second line to this:
+```
+a.setPhone("001-555-12345");
+```
+
+Thus you couldn't just add the checks without breaking other code (it wouldn't compile anymore).
